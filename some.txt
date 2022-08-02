@@ -1,0 +1,1261 @@
+Option Explicit
+Sub proc1()
+
+    Dim rgRange As Range
+    Dim rgRangeMain As Range
+    Set rgRangeMain = Workbooks("some").Worksheets("sheet").Range("D3:M12")
+    Dim rgV As Range
+    Set rgV = Workbooks("some").Worksheets("sheet").Range("C3:C12")
+    Dim rgH As Range
+    Set rgH = Workbooks("some").Worksheets("sheet").Range("D13:M13")
+    Dim rgWRange As Range
+    Set rgWRange = Workbooks("some").Worksheets("sheet").Range("D3:D12")
+    Dim WS As Worksheet
+    Set WS = Workbooks("some").Worksheets("sheet")
+
+    Dim Varray(1 To 10) As Double
+    Dim V As Long
+    Dim Harray(1 To 10) As Double
+    Dim H As Long
+    
+    Dim dblDepoCount As Double
+    Dim dblHeightDepo As Double
+    Dim dblH As Double
+    Dim dblV As Double
+    
+    Dim lngRandom As Long
+    Dim lngOffset As Long
+    
+    For Each rgRange In rgRangeMain
+    rgRange = "$"
+    rgRange.Font.ColorIndex = 4
+    Next rgRange
+    
+    For V = LBound(Varray) To UBound(Varray)
+    Varray(V) = rgV.Cells(V)
+    Next V
+    
+    For H = LBound(Harray) To UBound(Harray)
+    Harray(H) = rgH.Cells(H)
+    Next H
+    
+    lngOffset = 0
+    dblDepoCount = WS.Range("O3")
+    
+    For H = LBound(Harray) To UBound(Harray)
+    
+        Do Until WS.Range("D3:D12").Offset(0, lngOffset).Cells(WS.Range("D3:D12").Offset(0, lngOffset).Cells.Count) <> "$"
+    
+            For V = LBound(Varray) To UBound(Harray)
+            
+            dblV = Varray(V)
+            dblH = Harray(H)
+            Call MatrixRandom(dblHeightDepo, dblDepoCount, lngRandom, dblV, dblH)
+            Varray(V) = dblV
+            Harray(H) = dblH
+
+            If wsSheet.Range("D3:D12").Offset(0, lngOffColumn).Cells(V) < 0.01 Then
+            wsSheet.Range("D3:D12").Offset(0, lngOffColumn).Cells(V).Font.ColorIndex = 3
+            ElseIf wsSheet.Range("D3:D12").Offset(0, lngOffColumn).Cells(V) >= 0.01 And wsSheet.Range("D3:D12").Offset(0, lngOffColumn).Cells(V) <= 0.1049 Then
+            wsSheet.Range("D3:D12").Offset(0, lngOffColumn).Cells(V).Font.ColorIndex = 5
+            ElseIf wsSheet.Range("D3:D12").Offset(0, lngOffColumn).Cells(V) > 0.1049 Then
+            wsSheet.Range("D3:D12").Offset(0, lngOffColumn).Cells(V).Font.ColorIndex = 7
+            End If
+            
+            Next V
+            
+        Loop
+    
+    lngOffset = lngOffset + 1
+    Next H
+    
+End Sub
+Sub Matrix2()
+    
+    Dim rgRange As Range
+    Dim rgRangeMain As Range
+    Set rgRangeMain = Workbooks("some").Worksheets("sheet").Range("D33:M42")
+    Dim rgV As Range
+    Set rgV = Workbooks("some").Worksheets("sheet").Range("C33:C42")
+    Dim rgH As Range
+    Set rgH = Workbooks("some").Worksheets("sheet").Range("D43:M43")
+    Dim rgWRange As Range
+    Set rgWRange = Workbooks("some").Worksheets("sheet").Range("D33:D42")
+    Dim WS As Worksheet
+    Set WS = Workbooks("some").Worksheets("sheet")
+
+    Dim Varray(1 To 10) As Double
+    Dim V As Long
+    Dim Harray(1 To 10) As Double
+    Dim H As Long
+    
+    Dim dblDepoCount As Double
+    Dim dblHeightDepo As Double
+    Dim dblH As Double
+    Dim dblV As Double
+    
+    Dim lngRandom As Long
+    Dim lngOffset As Long
+    
+    For Each rgRange In rgRangeMain
+    rgRange = "$"
+    rgRange.Font.ColorIndex = 4
+    Next rgRange
+    
+    For V = LBound(Varray) To UBound(Varray)
+    Varray(V) = rgV.Cells(V)
+    Next V
+    
+    For H = LBound(Harray) To UBound(Harray)
+    Harray(H) = rgH.Cells(H)
+    Next H
+    
+    lngOffset = 0
+    dblDepoCount = WS.Range("O3")
+    
+    For H = LBound(Harray) To UBound(Harray)
+    
+        Do Until WS.Range("D33:D42").Offset(0, lngOffset).Cells(WS.Range("D33:D42").Offset(0, lngOffset).Cells.Count) <> "$"
+    
+            For V = LBound(Varray) To UBound(Harray)
+            
+            dblV = Varray(V)
+            dblH = Harray(H)
+            Call MatrixRandom1(dblHeightDepo, dblDepoCount, lngRandom, dblV, dblH)
+            Varray(V) = dblV
+            Harray(H) = dblH
+            
+            WS.Range("D33:D42").Offset(0, lngOffset).Cells(V) = dblHeightDepo
+            If WS.Range("D33:D42").Offset(0, lngOffset).Cells(V) < 0.01 Then
+            WS.Range("D33:D42").Offset(0, lngOffset).Cells(V).Font.ColorIndex = 3
+            ElseIf WS.Range("D33:D42").Offset(0, lngOffset).Cells(V) >= 0.01 And WS.Range("D33:D42").Offset(0, lngOffset).Cells(V) <= 0.1049 Then
+            WS.Range("D33:D42").Offset(0, lngOffset).Cells(V).Font.ColorIndex = 5
+            ElseIf WS.Range("D33:D42").Offset(0, lngOffset).Cells(V) > 0.1049 Then
+            WS.Range("D33:D42").Offset(0, lngOffset).Cells(V).Font.ColorIndex = 7
+            End If
+            
+            Next V
+            
+        Loop
+    
+    lngOffset = lngOffset + 1
+    Next H
+    
+End Sub
+
+
+Sub proc2()
+    
+    Workbooks("some").Worksheets("sheet").Range("J15") = Range("O3") * (1 - Range("O4") / 100) ^ Range("D15")
+    Workbooks("some").Worksheets("sheet").Range("L15") = ((((Range("O3") * (1 - Range("O4") / 100) ^ Range("D15")) * 100) / Range("O3")) - 100) / 100
+    
+End Sub
+
+Sub proc3()
+
+    Dim rgClearRange As Range
+    For Each rgClearRange In Workbooks("some").Worksheets("sheet").Range("D18:M27")
+    rgClearRange = "Day"
+    rgClearRange.Font.ColorIndex = 46
+    Next rgClearRange
+
+    Dim dblVarray(1 To 10) As Double
+    Dim V As Long
+    Dim dblHarray(1 To 10) As Double
+    Dim H As Long
+    Dim WS As Worksheet
+    Set WS = Workbooks("some").Worksheets("sheet")
+    Dim lngCaunt, lngCaunt2, lngCauntCycle As Long
+    Dim lngRandom As Long
+    Dim dblLow As Double
+    Dim lngFF As Long
+    Dim lng10time As Long
+    
+    lngFF = 0
+    
+    For V = LBound(dblVarray) To UBound(dblVarray)
+    dblVarray(V) = Workbooks("some").Worksheets("sheet").Range("C18:C27").Cells(V)
+    'MsgBox dblVarray(V)
+    Next V
+    
+    For H = LBound(dblHarray) To UBound(dblHarray)
+    dblHarray(H) = Workbooks("some").Worksheets("sheet").Range("D28:M28").Cells(H)
+    'MsgBox dblHarray(H)
+    Next H
+    
+    For H = LBound(dblHarray) To UBound(dblHarray)
+    
+        Do Until WS.Range("D18:D27").Offset(0, lngFF).Cells(WS.Range("D18:D27").Offset(0, lngFF).Cells.Count) <> "Day"
+        
+            For V = LBound(dblVarray) To UBound(dblVarray)
+            
+            lng10time = 0
+            lngCaunt2 = 0
+            lngCauntCycle = 0
+            
+                Do Until lng10time = 25
+            
+                    lngCaunt = 0
+                    dblLow = WS.Range("J15")
+                
+                    Do Until dblLow >= WS.Range("O3")
+                            
+                        lngRandom = WorksheetFunction.RandBetween(1, 100)
+                    
+                        If lngRandom <= dblVarray(V) Then
+                        dblLow = dblLow * (1 + WS.Range("O4") / 100 * dblHarray(H))
+                        'MsgBox " ïðèáûëü " & dblLow
+                        ElseIf lngRandom > dblVarray(V) Then
+                        dblLow = dblLow * (1 - WS.Range("O4") / 100)
+                        'MsgBox " óáûòîê " & dblLow
+                        End If
+        
+                        lngCaunt = lngCaunt + 1
+                    
+                        'MsgBox (dblLow * 100) / WS.Range("J14") - 100 & "%" & " ðàçíèöà ñ óìåíüøåííûì òåëîì äåïî "
+
+                        If lngCaunt >= WS.Range("D15") * 10 Then
+                        WS.Range("D18:D27").Offset(0, lngFF).Cells(V) = " - "
+                        lngCaunt = 0
+                        Exit Do
+                        ElseIf (dblLow * 100) / WS.Range("J15") - 100 <= WS.Range("O16") Then
+                        WS.Range("D18:D27").Offset(0, lngFF).Cells(V) = " - "
+                        lngCaunt = 0
+                        Exit Do
+'                        ElseIf dblLow >= WS.Range("O3") Then
+'                        WS.Range("D18:D27").Offset(0, lngFF).Cells(V) = lngCaunt
+                        End If
+                        
+                    Loop
+                    
+                    'MsgBox lngCaunt & " ñòîëüêî ñäåëîê ñåé÷àñ â îäíîì öèêëå "
+                    
+                    If WS.Range("D18:D27").Offset(0, lngFF).Cells(V) <> " - " Then
+                    lngCauntCycle = lngCauntCycle + 1           'ñ÷èòàåò êîëè÷åñòâî öèêëîâ, â êîòîðûõ çíà÷åíèå ÿ÷åéêè íå ðàâíî, óñïåøíî ùàêîí÷åííûå öèêëû " - "
+                    WS.Range("D18:D27").Offset(0, lngFF).Cells(V) = lngCaunt
+                    lngCaunt2 = lngCaunt2 + lngCaunt            'ñ÷èòàåò ñêîëüêî âîîáùå çà n ñïåøíûõ öèêëîâ íàêîïèëîñü ñäåëîê
+                    End If
+                           
+                    lng10time = lng10time + 1
+                    
+                Loop
+                
+                'MsgBox lngCaunt2 & " ñòîëüêî íàêîïèëîñü çà 10 öèêëîâ "
+                'MsgBox lngCauntCycle & " êîë-âî öèêëîâ, ãäå çíà÷åíèå íå ðàâíî  -  "
+                
+                If lngCauntCycle <> 0 And lngCaunt2 <> 0 Then
+                WS.Range("D18:D27").Offset(0, lngFF).Cells(V) = lngCaunt2 / lngCauntCycle
+                End If
+    
+            Next V
+            
+        Loop
+        
+        lngFF = lngFF + 1
+        
+    Next H
+    
+End Sub
+
+Sub graf()
+
+    Dim dblHeightDepo, dblHeightDepo1, dblLowDepo, dblLowDepo1, dblMaxCost, dblSelecktMax, dblSelecktMax1, dblMaxCost1, dblPicOfCost, dblPicOfCost1, dblDepoCount, dblDepoCount1, dblCountMaxCost, dblCountMaxCost1 As Double
+    Dim dblComeDepo, dblComeDepo1 As Double
+    Dim lngRandom, lngI, lngSpecForPer, lngSpecForPer2, lngCount As Long
+    Dim M1 As Double
+    Dim D As Double
+    Dim S As Double
+    Dim H As Double
+    Dim M As Double
+    Dim p As Double
+    Dim L1 As Double
+    Dim D1 As Double
+    Dim S1 As Double
+    Dim H1 As Double
+    Dim p1 As Double
+    Dim L11 As Double
+    
+    Dim Cht As Chart
+    Dim Cht1 As Chart
+    Dim chtObj As ChartObject
+    Dim rgClearRange1 As Range
+    Dim r As Range
+    Dim Aarray(1 To 100) As Long
+    Dim A As Long
+    
+    Dim dbl2low As Double
+    Dim dblLowCount As Double
+    Dim lnglow As Long
+    Dim dbl1low As Double
+    Dim L2w As Double
+    Dim LC As Double
+    Dim low As Long
+    Dim L1w As Double
+    Dim dbl2low1 As Double
+    Dim dblLowCount1 As Double
+    Dim lnglow1 As Long
+    Dim dbl1low1 As Double
+    Dim L2w1 As Double
+    Dim LC1 As Double
+    Dim low1 As Long
+    Dim L1w1 As Double
+    'âû÷èñëåíèå íóëèâàãî ïåðèîäà - åãî êîëè÷åñòâà
+    Dim dblTin0One As Double
+    Dim dblTin0Two As Double
+    Dim lngCountTin As Long
+    Dim lngT As Long
+    Dim dblLocalHeightDepo As Double
+    Dim dblLocalCost As Double
+    Dim T As Long
+    Dim LCC As Double
+    Dim LHD As Double
+    Dim T0O As Double
+    Dim T0W As Double
+    Dim CT As Long
+    Dim lngSVCount As Long
+    Dim lngSBCount As Long
+    Dim SVC As Long
+    Dim SBC As Long
+    
+    Dim dblSVC As Double
+    Dim dblSBC As Double
+    Dim dblSB As Double
+    Dim dblSV As Double
+    
+    Dim lngCountTin1 As Long
+    Dim lngT1 As Long
+    Dim dblLocalHeightDepo1 As Double
+    Dim dblLocalCost1 As Double
+    Dim T1 As Long
+    Dim LCC1 As Double
+    Dim LHD1 As Double
+    Dim CT1 As Long
+    Dim lngSVCount1 As Long
+    Dim lngSBCount1 As Long
+    Dim SVC1 As Long
+    Dim SBC1 As Long
+       
+    Dim rgRange As Range
+    Set rgRange = Workbooks("some").Worksheets("sheet").Range("Q2:Q10000")
+    Dim rgRange1 As Range
+    Set rgRange1 = Workbooks("some").Worksheets("sheet").Range("AP2:AP10000")
+    Dim WS As Worksheet
+    Set WS = Workbooks("some").Worksheets("sheet")
+    Dim rgSheet2Range As Range
+    Set rgSheet2Range = Workbooks("some").Worksheets("Ëèñò2").Range("A1:A100")
+    Dim i As Range
+    Set i = Workbooks("some").Worksheets("sheet").Range("Q2:Q10000")
+                                                                                                         'Do Until WS.Range("AP3") <> WS.Range("AP16")
+    dblLocalHeightDepo = WS.Range("O3")
+    dblLocalHeightDepo1 = WS.Range("O3")
+    dblHeightDepo1 = WS.Range("O3")
+    dblHeightDepo = WS.Range("O3")
+    dblDepoCount = WS.Range("O3")
+    dblDepoCount1 = WS.Range("O3")
+    dblLowDepo1 = WS.Range("O3")
+    dblLowDepo = WS.Range("O3")
+    lngT = 0
+    lngT1 = 0
+    lngSVCount = 0
+    lngSBCount = 0
+    lngSVCount1 = 0
+    lngSBCount1 = 0
+    lngCount = 0
+    dblPicOfCost = 0
+    dblPicOfCost1 = 0
+    dblSelecktMax = 0
+    dblSelecktMax1 = 0
+    dblCountMaxCost = 0
+    dblCountMaxCost1 = 0
+    lngCountTin = 0
+    lngCountTin1 = 0
+    dblTin0One = InputBox(" Ââåäè íèæíèé äèàïàçîí íóëÿ ")
+    dblTin0Two = InputBox(" Ââåäè âåðõíèé äèàïàçîí íóëÿ ")
+    dblSVC = InputBox(" Ââåäèòå íèæíèé ïðåäåë äëÿ ñâåðõäîõîäíîñòè ")
+    dblSBC = InputBox(" Ââåäèòå âåðõíèé ïðåäåë äëÿ ñâåðõïðîñàäêè ")
+    WS.Range("O11") = " [" & dblSVC & ";" & "+ inf)"
+    WS.Range("O12") = " (- inf;" & dblSBC & "]"
+    WS.Range("O6") = " [" & dblTin0One & ";" & dblTin0Two & "] "
+    
+    For Each chtObj In Workbooks("some").Worksheets("sheet").ChartObjects
+    chtObj.Delete
+    Next chtObj
+
+    For Each r In i
+    r = " - "
+    Next r
+
+    For Each rgClearRange1 In rgRange1
+    rgClearRange1 = " - "
+    Next rgClearRange1
+    
+    If WS.Range("O10") = "" Then
+    WS.Range("O10") = " - "
+    End If
+   
+        Do Until lngCount = WS.Range("O5")
+    
+            lngRandom = WorksheetFunction.RandBetween(1, 100)
+            'MsgBox lngRandom & "ðàíäîì ÷èñëî"
+            
+            If lngRandom <= WS.Range("O7") Then
+            dblDepoCount = dblDepoCount * (1 + WS.Range("O4") / 100 * WS.Range("O8"))
+            'MsgBox " ïðèáûëü " & dblDepoCount
+            ElseIf lngRandom > WS.Range("O7") Then
+            dblDepoCount = dblDepoCount * (1 - WS.Range("O4") / 100)
+            'MsgBox " óáûòîê " & dblDepoCount
+            End If
+            
+'            MsgBox ((dblDepoCount1 * 100) / dblHeightDepo1) - 100 & " ïðîñàäêà"
+            
+            If lngRandom <= WS.Range("O7") Then
+            dblDepoCount1 = dblDepoCount1 * (1 + WS.Range("O4") / 100 * WS.Range("O8"))
+            'MsgBox " ïðèáûëü " & dblDepoCount1
+            ElseIf lngRandom > WS.Range("O7") Then
+            dblDepoCount1 = dblDepoCount1 * (1 - WS.Range("O4") / 100)
+            'MsgBox " óáûòîê " & dblDepoCount1
+            End If
+        
+            'Ñ÷èòàåì Ìàêñèìàëüíóþ ïðîñàäêó âîîáùå çà îäèí ïåðèîä äëÿ ïåðâîãî ãðàôèêà.
+            
+            L1 = dblLowDepo
+            p = dblPicOfCost
+            M = dblMaxCost
+            H = dblHeightDepo
+            D = dblDepoCount
+            S = dblSelecktMax
+            Call MXC1(D, lngCount, S, H, M, p, L1)
+            dblDepoCount = D
+            dblSelecktMax = S
+            dblHeightDepo = H
+            dblMaxCost = M
+            dblPicOfCost = p
+            dblLowDepo = L1
+            
+            'Âûñ÷èòûâàåì ìàêñèìàëüíóþ ïðîñàäêó çà îäèí ïåðèîä äëÿ âòîðîãî ãðàôèêà.
+            
+            L11 = dblLowDepo1
+            p1 = dblPicOfCost1
+            M1 = dblMaxCost1
+            H1 = dblHeightDepo1
+            D1 = dblDepoCount1
+            S1 = dblSelecktMax1
+            Call MXC2(D1, lngCount, S1, H1, M1, p1, L11)
+            dblDepoCount1 = D1
+            dblSelecktMax1 = S1
+            dblHeightDepo1 = H1
+            dblMaxCost1 = M1
+            dblPicOfCost1 = p1
+            dblLowDepo1 = L11
+            
+            'Âû÷èñëåíèå ñðåäíåé ïðîñàäêè äëÿ ïåðâîãî ãðàôèêà.
+            
+            D = dblDepoCount
+            H = dblHeightDepo
+            L2w = dbl2low
+            LC = dblLowCount
+            low = lnglow
+            L1w = dbl1low
+            Call AC1(D, lngCount, H, L2w, LC, low, L1w)
+            dblDepoCount = D
+            dblHeightDepo = H
+            dbl2low = L2w
+            dblLowCount = LC
+            lnglow = low
+            dbl1low = L1w
+            
+            'Âû÷èñëåíèå ñðåäíåé ïðîñàäêè äëÿ âòîðîãî ãðàôèêà.
+            
+            D1 = dblDepoCount1
+            H1 = dblHeightDepo1
+            L2w1 = dbl2low1
+            LC1 = dblLowCount1
+            low1 = lnglow1
+            L1w1 = dbl1low1
+            Call AC2(D1, lngCount, H1, L2w1, LC1, low1, L1w1)
+            dblDepoCount1 = D1
+            dblHeightDepo1 = H1
+            dbl2low1 = L2w1
+            dblLowCount1 = LC1
+            lnglow1 = low1
+            dbl1low1 = L1w1
+            
+            'Êîëè÷åñòâî ïåðèîäîâ â 0, ñâåðõïðèáûëü è áîëüøàÿ ïðîñàäêà äëÿ ïåðâîãî ãðàôèêà.
+            
+            If WS.Range("O10") <> " - " Then
+                
+                dblSV = dblSVC
+                dblSB = dblSBC
+                SVC = lngSVCount
+                SBC = lngSBCount
+                T = lngT
+                LCC = dblLocalCost
+                D = dblDepoCount
+                LHD = dblLocalHeightDepo
+                T0O = dblTin0One
+                T0W = dblTin0Two
+                CT = lngCountTin
+                Call Tin0(T, LCC, D, LHD, T0O, T0W, CT, SVC, SBC, dblSV, dblSB)
+                lngT = T
+                dblLocalCost = LCC
+                dblDepoCount = D
+                dblLocalHeightDepo = LHD
+                dblTin0One = T0O
+                dblTin0Two = T0W
+                lngCountTin = CT
+                lngSVCount = SVC
+                lngSBCount = SBC
+                dblSVC = dblSV
+                dblSBC = dblSB
+                
+            End If
+            
+            'Êîëè÷åñòâî ïåðèîäîâ â 0, ñâåðõïðèáûëü è áîëüøàÿ ïðîñàäêà äëÿ âòîðîãî ãðàôèêà
+            
+            If WS.Range("O10") <> " - " Then
+
+                dblSV = dblSVC
+                dblSB = dblSBC
+                SVC1 = lngSVCount1
+                SBC1 = lngSBCount1
+                T1 = lngT1
+                LCC1 = dblLocalCost1
+                D1 = dblDepoCount1
+                LHD1 = dblLocalHeightDepo1
+                T0O = dblTin0One
+                T0W = dblTin0Two
+                CT1 = lngCountTin1
+                Call Tin01(T1, LCC1, D1, LHD1, T0O, T0W, CT1, SVC1, SBC1, dblSV, dblSB)
+                lngT1 = T1
+                dblLocalCost1 = LCC1
+                dblDepoCount1 = D1
+                dblLocalHeightDepo1 = LHD1
+                dblTin0One = T0O
+                dblTin0Two = T0W
+                lngCountTin1 = CT1
+                dblSVC = dblSV
+                dblSBC = dblSB
+                lngSVCount1 = SVC1
+                lngSBCount1 = SBC1
+            
+            End If
+            
+            If dblDepoCount > dblHeightDepo Then
+            dblHeightDepo = dblDepoCount
+            End If
+            
+            If dblDepoCount1 > dblHeightDepo1 Then
+            dblHeightDepo1 = dblDepoCount1
+            End If
+            
+            lngCount = lngCount + 1
+            
+            WS.Range("Q2") = WS.Range("O3")
+            WS.Range("AP2") = WS.Range("O3")
+
+            WS.Range("Q" & lngCount + 2) = dblDepoCount
+            WS.Range("AP" & lngCount + 2) = dblDepoCount1
+            
+        Loop
+                                                                                                                                  
+    Set Cht = Workbooks("some").Worksheets("sheet").Shapes.AddChart(Left:=891, Width:=1530, Top:=20, Height:=1234).Chart
+    Set Cht1 = Workbooks("some").Worksheets("sheet").Shapes.AddChart(Left:=891, Width:=1530, Top:=1353, Height:=1234).Chart
+    
+    With Cht
+    
+        .SetSourceData Source:=Sheets("sheet").Range(rgRange.Cells(1), rgRange.Cells(lngCount + 1))
+        .ChartType = xlLineMarkers
+        
+    End With
+    
+    With Cht1
+    
+        .SetSourceData Source:=Sheets("sheet").Range(rgRange1.Cells(1), rgRange1.Cells(lngCount + 1))
+        .ChartType = xlLineMarkers
+        
+    End With
+    
+    
+    dblComeDepo = (dblDepoCount * 100) / WS.Range("O3")
+    WS.Range("AS3") = (dblComeDepo - 100) / 100
+    
+    dblComeDepo1 = (dblDepoCount1 * 100) / WS.Range("O3")
+    WS.Range("AS16") = (dblComeDepo1 - 100) / 100
+    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    WS.Range("AS4") = dblSelecktMax / 100
+    
+    WS.Range("AS17") = dblSelecktMax1 / 100
+    
+    If WS.Range("AS4") <> 0 Then
+    WS.Range("AS8") = -(WS.Range("AS3") / WS.Range("AS4"))
+    End If
+    
+    If WS.Range("AS17") <> 0 Then
+    WS.Range("AS21") = -(WS.Range("AS16") / WS.Range("AS17"))
+    End If
+    
+    If lnglow = 0 Then
+    WS.Range("AS5") = " NoCost "
+    ElseIf WS.Range("O9") <> 1 Then
+    WS.Range("AS5") = (dblLowCount / lnglow) / 100
+    'MsgBox dblLowCount / lnglow & " - ýòî ñðåäíÿÿ ïðîñàäêà çà îäèí ïåðèîä"
+    End If
+
+    If lnglow1 = 0 Then
+    WS.Range("AS18") = " NoCost "
+    ElseIf WS.Range("O9") <> 1 Then
+    WS.Range("AS18") = (dblLowCount1 / lnglow1) / 100
+    End If
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    WS.Range("AU8") = -(WS.Range("AU4") / WS.Range("AU6"))
+    WS.Range("AU21") = -(WS.Range("AU17") / WS.Range("AU19"))
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    If WS.Range("O10") = " - " Then
+    WS.Range("AS9") = " - "
+    Else
+    WS.Range("AS9") = lngCountTin
+    End If
+    
+    If WS.Range("O10") = " - " Then
+    WS.Range("AS22") = " - "
+    Else
+    WS.Range("AS22") = lngCountTin1
+    End If
+    
+    WS.Range("AS23") = lngSVCount1
+    WS.Range("AS24") = lngSBCount1
+    
+    WS.Range("AS10") = lngSVCount
+    WS.Range("AS11") = lngSBCount
+                                                                                                                        'Loop
+End Sub
+
+'Ñ÷èòàåì Ìàêñèìàëüíóþ ïðîñàäêó âîîáùå çà îäèí ïåðèîä äëÿ ïåðâîãî ãðàôèêà
+
+Sub MXC1(ByRef dblDepoCount As Double, ByRef lngCount As Long, ByRef dblSelecktMax As Double, ByRef dblHeightDepo As Double, ByRef dblMaxCost As Double, ByRef dblPicOfCost As Double, ByRef dblLowDepo As Double)
+    
+    Dim WS As Worksheet
+    Set WS = Workbooks("some").Worksheets("sheet")
+    
+    If dblDepoCount > dblHeightDepo Then
+    
+        'If dblMaxCost <> " " Then
+        dblMaxCost = dblPicOfCost
+        'End If
+    
+    dblPicOfCost = 0
+    End If
+    
+    If dblDepoCount < dblHeightDepo Then
+    dblLowDepo = ((dblDepoCount * 100) / dblHeightDepo) - 100
+    End If
+    
+    If dblDepoCount < dblHeightDepo Then
+    
+        If dblLowDepo < dblPicOfCost Then
+        dblPicOfCost = dblLowDepo
+        dblMaxCost = dblPicOfCost
+        End If
+    
+    End If
+    
+    If dblMaxCost < dblSelecktMax Then
+    dblSelecktMax = dblMaxCost
+    End If
+    
+    If WS.Range("O4") - lngCount = 1 Then
+    
+        If dblDepoCount < dblHeightDepo Then
+    
+            If dblMaxCost < dblSelecktMax Then
+            dblSelecktMax = dblMaxCost
+            End If
+    
+        End If
+    
+    End If
+    
+End Sub
+
+'Âûñ÷èòûâàåì ìàêñèìàëüíóþ ïðîñàäêó çà îäèí ïåðèîä äëÿ âòîðîãî ãðàôèêà.
+
+Sub MXC2(ByRef dblDepoCount1 As Double, ByRef lngCount As Long, ByRef dblSelecktMax1 As Double, ByRef dblHeightDepo1 As Double, ByRef dblMaxCost1 As Double, ByRef dblPicOfCost1 As Double, ByRef dblLowDepo1 As Double)
+
+    Dim WS As Worksheet
+    Set WS = Workbooks("some").Worksheets("sheet")
+
+    If dblDepoCount1 > dblHeightDepo1 Then
+    
+        'If dblMaxCost1 <> "" Then
+        dblMaxCost1 = dblPicOfCost1
+        'End If
+    
+        dblPicOfCost1 = 0
+        
+    End If
+    
+    If dblDepoCount1 < dblHeightDepo1 Then
+    dblLowDepo1 = ((dblDepoCount1 * 100) / dblHeightDepo1) - 100
+    End If
+    
+    If dblDepoCount1 < dblHeightDepo1 Then
+    
+        If dblLowDepo1 < dblPicOfCost1 Then
+        dblPicOfCost1 = dblLowDepo1
+        dblMaxCost1 = dblPicOfCost1
+        End If
+    
+    End If
+    
+    If dblMaxCost1 < dblSelecktMax1 Then
+    dblSelecktMax1 = dblMaxCost1
+    End If
+    
+    If WS.Range("O4") - lngCount = 1 Then
+    
+        If dblDepoCount1 < dblHeightDepo1 Then
+    
+            If dblMaxCost1 < dblSelecktMax1 Then
+            dblSelecktMax1 = dblMaxCost1
+            End If
+    
+        End If
+    
+    End If
+
+End Sub
+
+'Âû÷èñëåíèå ñðåäíåé ïðîñàäêè äëÿ ïåðâîãî ãðàôèêà.
+
+Sub AC1(ByRef dblDepoCount As Double, ByRef lngCount As Long, ByRef dblHeightDepo As Double, ByRef dbl2low As Double, ByRef dblLowCount As Double, ByRef lnglow As Long, ByRef dbl1low As Double)
+ 
+    Dim WS As Worksheet
+    Set WS = Workbooks("some").Worksheets("sheet")
+    
+    If dblDepoCount > dblHeightDepo Then
+    
+        If dbl2low <= WS.Range("O9") Then
+        dblLowCount = dblLowCount + dbl2low
+        lnglow = lnglow + 1
+        'MsgBox dbl2low & "   - 1st graf"
+        End If
+        
+    dbl2low = 0
+    End If
+    
+    If dblDepoCount < dblHeightDepo Then
+    dbl1low = ((dblDepoCount * 100) / dblHeightDepo) - 100
+    End If
+    
+    If dblDepoCount < dblHeightDepo Then
+    
+        If dbl1low < dbl2low Then
+        dbl2low = dbl1low
+        End If
+        
+    End If
+    
+    If WS.Range("O5") - lngCount = 1 Then
+    
+        If dblDepoCount < dblHeightDepo Then
+            
+            If dbl2low < WS.Range("O9") Then
+            dblLowCount = dblLowCount + dbl2low
+            lnglow = lnglow + 1
+            End If
+            
+        End If
+        
+    End If
+     
+End Sub
+
+'Âû÷èñëåíèå ñðåäíåé ïðîñàäêè äëÿ âòîðîãî ãðàôèêà.
+
+Sub AC2(ByRef dblDepoCount1 As Double, ByRef lngCount As Long, ByRef dblHeightDepo1 As Double, ByRef dbl2low1 As Double, ByRef dblLowCount1 As Double, ByRef lnglow1 As Long, ByRef dbl1low1 As Double)
+
+    Dim WS As Worksheet
+    Set WS = Workbooks("some").Worksheets("sheet")
+    
+    If dblDepoCount1 > dblHeightDepo1 Then
+    
+        If dbl2low1 <= WS.Range("O9") Then
+        dblLowCount1 = dblLowCount1 + dbl2low1
+        lnglow1 = lnglow1 + 1
+        'MsgBox dbl2low1 & "   - 2st graf"
+        End If
+        
+    dbl2low1 = 0
+    End If
+    
+    If dblDepoCount1 < dblHeightDepo1 Then
+    dbl1low1 = ((dblDepoCount1 * 100) / dblHeightDepo1) - 100
+    End If
+    
+    If dblDepoCount1 < dblHeightDepo1 Then
+    
+        If dbl1low1 < dbl2low1 Then
+        dbl2low1 = dbl1low1
+        End If
+        
+    End If
+    
+    If WS.Range("O4") - lngCount = 1 Then
+    
+        If dblDepoCount1 < dblHeightDepo1 Then
+            
+            If dbl2low1 < WS.Range("O9") Then
+            dblLowCount1 = dblLowCount1 + dbl2low1
+            lnglow1 = lnglow1 + 1
+            End If
+            
+        End If
+        
+    End If
+     
+End Sub
+
+'Êîëè÷åñòâî ïåðèîäîâ â 0, ñâåðõäîõîäíîñòü è áîëüøàÿ ïðîñàäêà äëÿ ïåðâîãî ãðàôèêà.
+
+Sub Tin0(ByRef lngT As Long, ByRef dblLocalCost As Double, ByRef dblDepoCount As Double, ByRef dblLocalHeightDepo As Double, ByRef dblTin0One As Double, ByRef dblTin0Two As Double, ByRef lngCountTin As Long, ByRef lngSVCount As Long, ByRef lngSBCount As Long, ByRef dblSVC As Double, ByRef dblSBC As Double)
+
+    Dim WS As Worksheet
+    Set WS = Workbooks("some").Worksheets("sheet")
+
+    If lngT <= WS.Range("O10") Then
+    lngT = lngT + 1
+    End If
+    
+    If lngT = WS.Range("O10") Then
+    dblLocalCost = ((dblDepoCount * 100) / dblLocalHeightDepo) - 100
+        
+        If dblLocalCost >= dblTin0One And dblLocalCost <= dblTin0Two Then
+        lngCountTin = lngCountTin + 1
+        End If
+        
+        If dblLocalCost >= dblSVC Then
+        lngSVCount = lngSVCount + 1
+        End If
+        
+        If dblLocalCost <= dblSBC Then
+        lngSBCount = lngSBCount + 1
+        End If
+        
+    dblLocalHeightDepo = dblDepoCount
+    lngT = 0
+    
+    End If
+
+End Sub
+
+ 'Êîëè÷åñòâî ïåðèîäîâ â 0, ñâåðõ äîõîäíîñòü è áîëüøàÿ ïðîñàäêà äëÿ âòîðîãî ãðàôèêà
+ 
+Sub Tin01(ByRef lngT1 As Long, ByRef dblLocalCost1 As Double, ByRef dblDepoCount1 As Double, ByRef dblLocalHeightDepo1 As Double, ByRef dblTin0One As Double, ByRef dblTin0Two As Double, ByRef lngCountTin1 As Long, ByRef lngSVCount1 As Long, ByRef lngSBCount1 As Long, ByRef dblSVC As Double, ByRef dblSBC As Double)
+
+    Dim WS As Worksheet
+    Set WS = Workbooks("some").Worksheets("sheet")
+
+    If lngT1 <= WS.Range("O10") Then
+    lngT1 = lngT1 + 1
+    End If
+    
+    If lngT1 = WS.Range("O10") Then
+    dblLocalCost1 = ((dblDepoCount1 * 100) / dblLocalHeightDepo1) - 100
+        
+        If dblLocalCost1 >= dblTin0One And dblLocalCost1 <= dblTin0Two Then
+        lngCountTin1 = lngCountTin1 + 1
+        End If
+        
+        If dblLocalCost1 >= dblSVC Then
+        'MsgBox dblSVC & " dblSVC     " & dblLocalCost1 & " dblLocalCost1"
+        lngSVCount1 = lngSVCount1 + 1
+        'MsgBox lngSVCount1 & "   lngSVCount1"
+        End If
+        
+        If dblLocalCost1 <= dblSBC Then
+        'MsgBox dblSBC & " dblSBC     " & dblLocalCost1 & " dblLocalCost1"
+        lngSBCount1 = lngSBCount1 + 1
+        'MsgBox lngSBCount1 & "   lngSBCount1"
+        End If
+ 
+    dblLocalHeightDepo1 = dblDepoCount1
+    lngT1 = 0
+    
+    End If
+
+End Sub
+
+'Âû÷èñëåíèå âñåõ ñðåäíèõ çíà÷åíèé äëÿ ïåðâîãî ãðàôèêà
+
+Sub EverythingAverageGraf()
+
+    Dim WS As Worksheet
+    Set WS = Workbooks("some").Worksheets("sheet")
+    Dim dblEachDepoCount As Double
+    Dim dblCountAMCawaryDepo As Double
+    Dim dblAllCostAMC As Double
+    Dim dblTin0OneAMC As Double
+    Dim dblTin0TwoAMC As Double
+    Dim dblSVCAMC As Double
+    Dim dblSBCAMC As Double
+    
+    Dim dblEachDepoCount1 As Double
+    Dim dblCountAMCawaryDepo1 As Double
+    Dim dblAllCostAMC1 As Double
+        
+    Dim lngCountAMCmany As Long
+    Dim lngATin0Count As Long
+    Dim lngATinSVCount As Long
+    Dim lngATinSBCount As Long
+    
+    Dim lngCountAMCmany1 As Long
+    Dim lngATin0Count1 As Long
+    Dim lngATinSVCount1 As Long
+    Dim lngATinSBCount1 As Long
+    
+    lngCountAMCmany = 0
+    dblCountAMCawaryDepo = 0
+    dblEachDepoCount = 0
+    dblAllCostAMC = 0
+    lngATin0Count = 0
+    lngATinSVCount = 0
+    lngATinSBCount = 0
+    
+    lngCountAMCmany1 = 0
+    dblCountAMCawaryDepo1 = 0
+    dblEachDepoCount1 = 0
+    dblAllCostAMC1 = 0
+    lngATin0Count1 = 0
+    lngATinSVCount1 = 0
+    lngATinSBCount1 = 0
+    
+    dblTin0OneAMC = InputBox(" Ââåäè íèæíèé äèàïàçîí íóëÿ ")
+    dblTin0TwoAMC = InputBox(" Ââåäè âåðõíèé äèàïàçîí íóëÿ ")
+    dblSVCAMC = InputBox(" Ââåäèòå íèæíèé ïðåäåë äëÿ ñâåðõäîõîäíîñòè ")
+    dblSBCAMC = InputBox(" Ââåäèòå âåðõíèé ïðåäåë äëÿ ñâåðõïðîñàäêè ")
+    
+    Do Until lngCountAMCmany = WS.Range("AU2")
+
+        Dim dblLowDepoAMC As Double
+        Dim dblPicOfCostAMC As Double
+        Dim dblDepoCountAMC As Double
+        Dim dblHeightDepoAMC As Double
+        Dim dblSelecktMaxAMC As Double
+        Dim dblMaxCostAMC As Double
+        Dim dblPreEachDepoCount As Double
+        Dim dbl2lowAMC As Double
+        Dim dblLowCountAMC As Double
+        Dim dbl1lowAMC As Double
+        Dim dblLocalCostAMC As Double
+        Dim dblLocalHeightDepoAMC As Double
+        
+        Dim dblLowDepoAMC1 As Double
+        Dim dblPicOfCostAMC1 As Double
+        Dim dblDepoCountAMC1 As Double
+        Dim dblHeightDepoAMC1 As Double
+        Dim dblSelecktMaxAMC1 As Double
+        Dim dblMaxCostAMC1 As Double
+        Dim dblPreEachDepoCount1 As Double
+        Dim dbl2lowAMC1 As Double
+        Dim dblLowCountAMC1 As Double
+        Dim dbl1lowAMC1 As Double
+        Dim dblLocalCostAMC1 As Double
+        Dim dblLocalHeightDepoAMC1 As Double
+        
+        Dim lngCountTinAMC As Long
+        Dim lngSBCountAMC As Long
+        Dim lngSVCountAMC As Long
+        Dim lngRandomAMC As Long
+        Dim lngCountAMC As Long
+        Dim lnglowAMC As Long
+        Dim lngTAMC As Long
+        
+        Dim lngCountTinAMC1 As Long
+        Dim lngSBCountAMC1 As Long
+        Dim lngSVCountAMC1 As Long
+        Dim lngRandomAMC1 As Long
+        Dim lngCountAMC1 As Long
+        Dim lnglowAMC1 As Long
+        Dim lngTAMC1 As Long
+        
+        lngSVCountAMC = 0
+        lngSBCountAMC = 0
+        lngTAMC = 0
+        dblSelecktMaxAMC = 0
+        lngCountTinAMC = 0
+        lngCountAMC = 0
+        dblPicOfCostAMC = 0
+        
+        lngSVCountAMC1 = 0
+        lngSBCountAMC1 = 0
+        lngTAMC1 = 0
+        dblSelecktMaxAMC1 = 0
+        lngCountTinAMC1 = 0
+        lngCountAMC1 = 0
+        dblPicOfCostAMC1 = 0
+        
+        dblHeightDepoAMC = WS.Range("O3")
+        dblDepoCountAMC = WS.Range("O3")
+        dblLowDepoAMC = WS.Range("O3")
+        dblLocalHeightDepoAMC = WS.Range("O3")
+        
+        dblHeightDepoAMC1 = WS.Range("O3")
+        dblDepoCountAMC1 = WS.Range("O3")
+        dblLowDepoAMC1 = WS.Range("O3")
+        dblLocalHeightDepoAMC1 = WS.Range("O3")
+
+        WS.Range("O11") = " [" & dblSVCAMC & ";" & "+ inf)"
+        WS.Range("O12") = " (- inf;" & dblSBCAMC & "]"
+        WS.Range("O6") = " [" & dblTin0OneAMC & ";" & dblTin0TwoAMC & "] "
+        
+        Do Until lngCountAMC = WS.Range("O5")
+    
+            lngRandomAMC = WorksheetFunction.RandBetween(1, 100)
+            'MsgBox lngRandomAMC & "ðàíäîì ÷èñëî"
+            
+            
+            
+            
+           'Call ForEachTrade(lngRandomAMC, dblDepoCountAMC, dblDepoCountAMC1)
+            
+            If lngRandomAMC <= WS.Range("O7") Then
+            dblDepoCountAMC = dblDepoCountAMC * (1 + WS.Range("O4") / 100 * WS.Range("O8"))
+            'MsgBox " ïðèáûëü " & dblDepoCountAMC
+            ElseIf lngRandomAMC > WS.Range("O7") Then
+            dblDepoCountAMC = dblDepoCountAMC * (1 - WS.Range("O4") / 100)
+            'MsgBox " óáûòîê " & dblDepoCountAMC
+            End If
+
+            
+            
+            If lngRandomAMC <= WS.Range("O7") Then
+            dblDepoCountAMC1 = dblDepoCountAMC1 * (1 + WS.Range("O4") / 100 * WS.Range("O8"))
+            'MsgBox " ïðèáûëü " & dblDepoCountAMC1
+            ElseIf lngRandomAMC > WS.Range("O7") Then
+            dblDepoCountAMC1 = dblDepoCountAMC1 * (1 - WS.Range("O4") / 100)
+            'MsgBox " óáûòîê " & dblDepoCountAMC1
+            End If
+            
+            
+            
+            
+            
+            'Âûçîâ ôóíêöèè äëÿ íàõîæäåíèÿ ìàêñèìàëüíîé ïðîñàäêè.
+            
+            Call MXC1(dblDepoCountAMC, lngCountAMC, dblSelecktMaxAMC, dblHeightDepoAMC, dblMaxCostAMC, dblPicOfCostAMC, dblLowDepoAMC)
+            
+            Call MXC2(dblDepoCountAMC1, lngCountAMC1, dblSelecktMaxAMC1, dblHeightDepoAMC1, dblMaxCostAMC1, dblPicOfCostAMC1, dblLowDepoAMC1)
+            
+            'Âûçîâ ôóíêöèè äëÿ íàõîæäåíèÿ ñðåäíåé ïðîñàäêè.
+            
+            Call AC1(dblDepoCountAMC, lngCountAMC, dblHeightDepoAMC, dbl2lowAMC, dblLowCountAMC, lnglowAMC, dbl1lowAMC)
+            
+            Call AC2(dblDepoCountAMC1, lngCountAMC, dblHeightDepoAMC1, dbl2lowAMC1, dblLowCountAMC1, lnglowAMC1, dbl1lowAMC1)
+            
+            'Êîëè÷åñòâî ïåðèîäîâ â 0, ñâåðõäîõîäíîñòü è áîëüøàÿ ïðîñàäêà äëÿ ïåðâîãî ãðàôèêà.
+            
+            Call Tin0(lngTAMC, dblLocalCostAMC, dblDepoCountAMC, dblLocalHeightDepoAMC, dblTin0OneAMC, dblTin0TwoAMC, lngCountTinAMC, lngSVCountAMC, lngSBCountAMC, dblSVCAMC, dblSBCAMC)
+            
+            Call Tin01(lngTAMC1, dblLocalCostAMC1, dblDepoCountAMC1, dblLocalHeightDepoAMC1, dblTin0OneAMC, dblTin0TwoAMC, lngCountTinAMC1, lngSVCountAMC1, lngSBCountAMC1, dblSVCAMC, dblSBCAMC)
+                      
+            If dblDepoCountAMC > dblHeightDepoAMC Then
+            dblHeightDepoAMC = dblDepoCountAMC
+            End If
+            
+            If dblDepoCountAMC1 > dblHeightDepoAMC1 Then
+            dblHeightDepoAMC1 = dblDepoCountAMC1
+            End If
+             
+        lngCountAMC = lngCountAMC + 1
+        
+        Loop
+        
+    'MsgBox dblSelecktMaxAMC
+
+    dblCountAMCawaryDepo = dblCountAMCawaryDepo + dblSelecktMaxAMC
+    lngCountAMCmany = lngCountAMCmany + 1
+    
+    dblPreEachDepoCount = ((dblDepoCountAMC * 100) / WS.Range("O3")) - 100
+    'MsgBox dblPreEachDepoCount
+    dblEachDepoCount = dblEachDepoCount + dblPreEachDepoCount
+    'MsgBox dblEachDepoCount & "Ýòî ñëîæåííîå óæå"
+    
+    dblAllCostAMC = dblAllCostAMC + (dblLowCountAMC / lnglowAMC)
+    'MsgBox dblLowCountAMC / lnglowAMC & "  -  ïðîñàäêà â íàñòîÿùåì öèêëå"
+    'MsgBox dblAllCostAMC & "  -  ýòî ñëîæåííîÿ ïðîñàäêà"
+    
+    lngATin0Count = lngATin0Count + lngCountTinAMC
+    lngATinSVCount = lngATinSVCount + lngSVCountAMC
+    lngATinSBCount = lngATinSBCount + lngSBCountAMC
+    
+    
+    
+    
+    'MsgBox dblSelecktMaxAMC1
+
+    dblCountAMCawaryDepo1 = dblCountAMCawaryDepo1 + dblSelecktMaxAMC1
+    lngCountAMCmany1 = lngCountAMCmany1 + 1
+    
+    dblPreEachDepoCount1 = ((dblDepoCountAMC1 * 100) / WS.Range("O3")) - 100
+    'MsgBox dblPreEachDepoCount1
+    dblEachDepoCount1 = dblEachDepoCount1 + dblPreEachDepoCount1
+    'MsgBox dblEachDepoCount1 & "Ýòî ñëîæåííîå óæå"
+    
+    dblAllCostAMC1 = dblAllCostAMC1 + (dblLowCountAMC1 / lnglowAMC1)
+    'MsgBox dblLowCountAMC1 / lnglowAMC1 & "  -  ïðîñàäêà â íàñòîÿùåì öèêëå"
+    'MsgBox dblAllCostAMC1 & "  -  ýòî ñëîæåííîÿ ïðîñàäêà"
+    
+    lngATin0Count1 = lngATin0Count1 + lngCountTinAMC1
+    lngATinSVCount1 = lngATinSVCount1 + lngSVCountAMC1
+    lngATinSBCount1 = lngATinSBCount1 + lngSBCountAMC1
+    
+    Loop
+    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    'MsgBox dblEachDepoCount & "Ýòî ñëîæåííîå óæå"
+    WS.Range("AU4") = (dblCountAMCawaryDepo / WS.Range("AU2")) / 100
+    WS.Range("AU3") = (dblEachDepoCount / WS.Range("AU2")) / 100
+    WS.Range("AU5") = (dblAllCostAMC / WS.Range("AU2")) / 100
+    
+    WS.Range("AU7") = (WS.Range("AU3") / WS.Range("AU5"))
+    WS.Range("AU8") = (WS.Range("AU3") / WS.Range("AU4"))
+    
+    WS.Range("AU9") = (lngATin0Count / WS.Range("AU2"))
+    WS.Range("AU10") = lngATinSVCount / WS.Range("AU2")
+    WS.Range("AU11") = lngATinSBCount / WS.Range("AU2")
+    
+    
+    
+    'MsgBox dblEachDepoCount1 & "Ýòî ñëîæåííîå óæå"
+    WS.Range("AU17") = (dblCountAMCawaryDepo1 / WS.Range("AU2")) / 100
+    WS.Range("AU16") = (dblEachDepoCount1 / WS.Range("AU2")) / 100
+    WS.Range("AU18") = (dblAllCostAMC1 / WS.Range("AU2")) / 100
+    
+    WS.Range("AU20") = (WS.Range("AU16") / WS.Range("AU18"))
+    WS.Range("AU21") = (WS.Range("AU16") / WS.Range("AU17"))
+    
+    WS.Range("AU22") = (lngATin0Count1 / WS.Range("AU2"))
+    WS.Range("AU23") = lngATinSVCount1 / WS.Range("AU2")
+    WS.Range("AU24") = lngATinSBCount1 / WS.Range("AU2")
+       
+End Sub
+
+Sub ForEachTrade(ByRef lngRandomAMC As Long, ByRef dblDepoCountAMC As Double, ByRef dblDepoCountAMC1 As Double)
+
+    Dim WS As Worksheet
+    Set WS = Workbooks("some").Worksheets("sheet")
+
+    If lngRandomAMC <= WS.Range("O7") Then
+    dblDepoCountAMC1 = dblDepoCountAMC1 * (1 + WS.Range("O4") / 100 * WS.Range("O8"))
+    'MsgBox " ïðèáûëü " & dblDepoCountAMC1
+    ElseIf lngRandomAMC > WS.Range("O7") Then
+    dblDepoCountAMC1 = dblDepoCountAMC1 * (1 - WS.Range("O4") / 100)
+    'MsgBox " óáûòîê " & dblDepoCountAMC1
+    End If
+    
+End Sub
+
+Sub MatrixRandom(ByRef dblHeightDepo As Double, ByRef dblDepoCount As Double, ByRef lngRandom As Long, ByRef V As Double, ByRef H As Double)
+
+    Dim WS As Worksheet
+    Set WS = Workbooks("some").Worksheets("sheet")
+
+    Dim lngColVoTr As Long
+    Dim lngCikl As Long
+    Dim dblForCount As Double
+    
+    lngColVoTr = 0
+    lngCikl = 0
+    dblHeightDepo = 0
+    dblForCount = 0
+
+    Do Until lngCikl = WS.Range("O2")
+    dblDepoCount = WS.Range("O3")
+    lngColVoTr = 0
+    
+        Do Until lngColVoTr = WS.Range("O5")
+    
+            lngRandom = WorksheetFunction.RandBetween(1, 100)
+            
+            If lngRandom <= V Then
+            'MsgBox V & " - ýòî V   " & lngRandom & " - ýòî lngRandom"
+            dblDepoCount = dblDepoCount * (1 + ((WS.Range("O4") / 100) * H))
+            ElseIf lngRandom > V Then
+            dblDepoCount = dblDepoCount * (1 - (WS.Range("O4") / 100))
+            End If
+            
+            'MsgBox dblDepoCount & " ëîêàëüíûé âûõîä"
+            
+        lngColVoTr = lngColVoTr + 1
+        Loop
+        
+    'MsgBox dblDepoCount & "êîíå÷íûé âûõîä"
+        
+    dblHeightDepo = dblHeightDepo + ((dblDepoCount * 100) / WS.Range("O3") - 100)
+    lngCikl = lngCikl + 1
+    
+    'MsgBox dblHeightDepo & "   ñóìà äåïî"
+    
+    Loop
+    
+    dblHeightDepo = (dblHeightDepo / WS.Range("O2")) / 100
+       
+End Sub
+
+
+
+Sub MatrixRandom1(ByRef dblHeightDepo As Double, ByRef dblDepoCount As Double, ByRef lngRandom As Long, ByRef V As Double, ByRef H As Double)
+
+    Dim WS As Worksheet
+    Set WS = Workbooks("some").Worksheets("sheet")
+
+    Dim lngColVoTr As Long
+    Dim lngCikl As Long
+    Dim dblForCount As Double
+    
+    lngColVoTr = 0
+    lngCikl = 0
+    dblHeightDepo = 0
+    dblForCount = 0
+
+    Do Until lngCikl = WS.Range("O2")
+    dblDepoCount = WS.Range("O3")
+    lngColVoTr = 0
+    
+        Do Until lngColVoTr = WS.Range("O5")
+    
+            lngRandom = WorksheetFunction.RandBetween(1, 100)
+            
+            If lngRandom <= V Then
+            'MsgBox V & " - ýòî V   " & lngRandom & " - ýòî lngRandom"
+            dblDepoCount = dblDepoCount * (1 + ((WS.Range("O4") / 100) * H))
+            ElseIf lngRandom > V Then
+            dblDepoCount = dblDepoCount * (1 - (WS.Range("O4") / 100))
+            End If
+            
+            'MsgBox dblDepoCount & " ëîêàëüíûé âûõîä"
+            
+        lngColVoTr = lngColVoTr + 1
+        Loop
+        
+    'MsgBox dblDepoCount & "êîíå÷íûé âûõîä"
+        
+    dblHeightDepo = dblHeightDepo + ((dblDepoCount * 100) / WS.Range("O3") - 100)
+    lngCikl = lngCikl + 1
+    
+    'MsgBox dblHeightDepo & "   ñóìà äåïî"
+    
+    Loop
+    
+    dblHeightDepo = (dblHeightDepo / WS.Range("O2")) / 100
+       
+End Sub
+
+
+
+
+
+
+
+
+
+
